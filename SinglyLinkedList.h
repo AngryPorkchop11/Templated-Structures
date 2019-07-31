@@ -4,7 +4,7 @@
 using namespace std;
 
 template<class T>
-class DoublyLinkedList
+class SinglyLinkedList
 {
 public:
 	void print()
@@ -21,14 +21,13 @@ public:
 		cout << "]\n";
 		cout << "SIZE: " << GetSize() << endl;
 	}
-//Constructor
-	DoublyLinkedList() 
+	//Constructor
+	SinglyLinkedList()
 	{
 		_head = NULL;
-		_tail = NULL;
 		_size = 0;
 	}
-//Returns first link
+	//Returns first link
 	T Peek()
 	{
 		if (_size == 0)
@@ -40,7 +39,7 @@ public:
 	{
 		return _size;
 	}
-//Add item at back in O(N) time
+	//Add item at back in O(N) time
 	bool AppendItem(T t)
 	{
 		//Alocate a new node and fill data w/ current object
@@ -51,58 +50,25 @@ public:
 		if (_size == 0)
 		{
 			_head = ptrNew;
-			_tail = ptrNew;
-
-			_tail->next = NULL;
-			_tail->prev = NULL;
-
 			_head->next = NULL;
-			_head->prev = NULL;
 			_size++;
 			return true;
 		}
 
-		Node *ptr = _head;
-		Node *run = _head;
+		Node* ptr = _head;
+		Node* run = _head;
 		while (ptr)
 		{
 			run = ptr;
 			ptr = ptr->next;
 		}
 		//Insert at end
-		ptrNew->prev = run;
 		ptrNew->next = NULL;
 		run->next = ptrNew;
+		_size++;
 		return true;
 	}
-//Add item at back in O(1) time
-	void AppendItemO1(T t)
-	{
-		Node* ptrNew = new Node;
-		ptrNew->data = t;
-
-		//If the list is empty
-		if (_size == 0)
-		{
-			_head = ptrNew;
-			_tail = ptrNew;
-
-			_tail->next = NULL;
-			_tail->prev = NULL;
-
-			_head->next = NULL;
-			_head->prev = NULL;
-			_size++;
-			return;
-		}
-		//Insert at end O(1)
-		ptrNew->prev = _tail;
-		_tail->next = ptrNew;
-		ptrNew->next = NULL;
-		_tail = ptrNew;
-		_size++;
-	}
-//Add item at top
+	//Add item at top
 	bool PrependItem(T t)
 	{
 		Node* ptrNew = new Node;
@@ -111,23 +77,17 @@ public:
 		if (_size == 0)
 		{
 			_head = ptrNew;
-			_tail = ptrNew;
-			_tail->next = NULL;
-			_tail->prev = NULL;
-
 			_head->next = NULL;
-			_head->prev = NULL;
 			_size++;
 			return true;
 		}
 		//Insert at beginning of list
 		ptrNew->next = _head;
-		ptrNew->prev = NULL;
 		_head = ptrNew;
 		_size++;
 		return true;
 	}
-//Delete from top
+	//Delete from top
 	T DeleteItem()
 	{
 		Node* ptr = _head;
@@ -141,7 +101,6 @@ public:
 		else if (_size == 1)
 		{
 			_head = NULL;
-			_tail = NULL;
 			_size--;
 			T info = ptr->data;
 			delete ptr;
@@ -150,7 +109,6 @@ public:
 		// Remove from front
 		else
 		{
-			_head->next->prev = NULL;
 			_head = _head->next;
 
 			_size--;
@@ -159,14 +117,14 @@ public:
 			return info;
 		}
 	}
-//Destructor
-	~DoublyLinkedList()
+	//Destructor
+	~SinglyLinkedList()
 	{
 		if (_size == 0)
 			return;
-		
-		Node *ptr = _head;
-		Node *run = _head;
+
+		Node* ptr = _head;
+		Node* run = _head;
 		while (ptr)
 		{
 			run = ptr->next;
@@ -181,9 +139,7 @@ private:
 	struct  Node
 	{
 		Node* next;
-		Node* prev;
 		int data;
 	};
 	Node* _head;
-	Node* _tail;
 };
