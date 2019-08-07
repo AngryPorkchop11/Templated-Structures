@@ -13,12 +13,11 @@ int main()
 	cout << "enter -1 to exit & print \n";
 	cout << "Enter Number to add: ";
 	cin >> key;
-	cout << endl;
 
 	DoublyLinkedList<int> *list = new DoublyLinkedList<int>();
 	while (key != -1)
 	{
-		list->AppendItemO1(key);
+		list->PrependItem(key);
 		cout << endl;
 		cout << "Enter Number to add: ";
 		cin >> key;
@@ -26,5 +25,11 @@ int main()
 	cout << "-----------------------------------------------\n";
 	cout << "List: ";
 	list->print();
+
+	cout << "HEAD = ";
+	list->Peek();
+	cout << endl;
+	cout << "TAIL = ";
+	list->PeekEnd();
 	return 0;
 }
