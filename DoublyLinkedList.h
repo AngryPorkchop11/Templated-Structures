@@ -33,7 +33,14 @@ public:
 	{
 		if (_size == 0)
 			exit(1);
-		return _head->data;
+		 cout << _head->data;
+	}
+
+	T PeekEnd()
+	{
+		if (_size == 0)
+			exit(1);
+		cout << _tail->data;
 	}
 
 	unsigned int GetSize()
@@ -73,6 +80,8 @@ public:
 		ptrNew->prev = run;
 		ptrNew->next = NULL;
 		run->next = ptrNew;
+		_tail = ptrNew;
+		_size++;
 		return true;
 	}
 //Add item at back in O(1) time
@@ -92,6 +101,7 @@ public:
 
 			_head->next = NULL;
 			_head->prev = NULL;
+
 			_size++;
 			return;
 		}
