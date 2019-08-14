@@ -192,7 +192,7 @@ private:
 	{
 		Node* next;
 		Node* prev;
-		int data;
+		T data;
 	};
 	Node* _head;
 	Node* _tail;
