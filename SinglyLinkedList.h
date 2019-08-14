@@ -139,7 +139,7 @@ private:
 	struct  Node
 	{
 		Node* next;
-		int data;
+		T data;
 	};
 	Node* _head;
 };
